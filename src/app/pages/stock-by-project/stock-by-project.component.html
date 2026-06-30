@@ -1,0 +1,194 @@
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Stock par Projet</h1>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Vue visuelle du stock par site</p>
+    </div>
+    @if (selectedProject()) {
+    <button (click)="backToProjects()"
+      class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+      ← Retour aux Projets
+    </button>
+    }
+  </div>
+
+  <!-- Projects View -->
+  @if (!selectedProject()) {
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    @for (project of projects(); track project.id) {
+    <div (click)="selectProject(project)"
+      class="card cursor-pointer hover:shadow-lg transition-all duration-200 border-2 hover:border-primary-500 dark:hover:border-primary-400">
+      <div class="flex items-start gap-4">
+        <div class="flex-shrink-0">
+          <div class="w-16 h-16 rounded-lg flex items-center justify-center"
+            [class]="getStatusBgColor(getStockStatus(project))">
+            <svg class="w-8 h-8" [class]="getStatusColor(getStockStatus(project))" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex-1 min-w-0">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">{{ project.name }}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-3">{{ project.description }}</p>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <p class="text-xs text-gray-600 dark:text-gray-400">Sites</p>
+              <p class="text-lg font-bold text-gray-900 dark:text-white">{{ project.sites?.length || 0 }}</p>
+            </div>
+            <div class="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <p class="text-xs text-gray-600 dark:text-gray-400">Articles</p>
+              <p class="text-lg font-bold text-gray-900 dark:text-white">{{ formatNumber(getTotalItems(project)) }}</p>
+            </div>
+            <div class="text-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+              <p class="text-xs text-gray-600 dark:text-gray-400">Valeur</p>
+              <p class="text-lg font-bold text-primary-600 dark:text-primary-400">{{
+                formatCurrency(getTotalValue(project)) }}</p>
+            </div>
+
+
+          </div>
+          @if (getStockStatus(project) !== 'good') {
+          <div class="mt-3 flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full" [class]="getStatusColor(getStockStatus(project))"></span>
+            <span class="text-xs font-medium" [class]="{
+              'text-danger-600 dark:text-danger-400': getStockStatus(project) === 'critical',
+              'text-warning-600 dark:text-warning-400': getStockStatus(project) === 'warning'
+            }">
+              @if (getStockStatus(project) === 'critical') {
+              <span>Stock critique détecté</span>
+              } @else {
+              <span>Attention: stock faible</span>
+              }
+            </span>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  }
+
+  <!-- Sites View -->
+  @if (selectedProject() && !selectedSite()) {
+  <div class="space-y-4">
+    <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+      <span class="font-medium">Projet:</span>
+      <span class="font-semibold text-gray-900 dark:text-white">{{ selectedProject()?.name }}</span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (site of selectedProject()?.sites; track site.id) {
+      <div (click)="selectSite(site)"
+        class="card cursor-pointer hover:shadow-lg transition-all duration-200 border-2 hover:border-primary-500 dark:hover:border-primary-400">
+        <div class="flex items-start gap-3 mb-3">
+          <div class="w-12 h-12 rounded-lg flex items-center justify-center"
+            [class]="getStatusBgColor(getSiteStockStatus(site))">
+            <svg class="w-6 h-6" [class]="getStatusColor(getSiteStockStatus(site))" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <h3 class="text-base font-semibold text-gray-900 dark:text-white truncate">{{ site.name }}</h3>
+            <p class="text-xs text-gray-600 dark:text-gray-400">{{ site.location }}</p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-600 dark:text-gray-400">Articles:</span>
+            <span class="text-sm font-bold text-gray-900 dark:text-white">{{ formatNumber(site.totalItems || 0)
+              }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-600 dark:text-gray-400">Valeur:</span>
+            <span class="text-sm font-bold text-primary-600 dark:text-primary-400">{{ formatCurrency(site.totalValue ||
+              0) }}</span>
+          </div>
+          <div class="flex justify-between items-center">
+            <span class="text-xs text-gray-600 dark:text-gray-400">Transactions:</span>
+            <span class="text-sm font-bold text-gray-900 dark:text-white">{{ site.recentTransactions || 0 }}</span>
+          </div>
+        </div>
+
+        @if (site.lowStockItems > 0 || site.criticalStockItems > 0) {
+        <div class="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full" [class]="getStatusColor(getSiteStockStatus(site))"></span>
+            <span class="text-xs font-medium" [class]="{
+              'text-danger-600 dark:text-danger-400': getSiteStockStatus(site) === 'critical',
+              'text-warning-600 dark:text-warning-400': getSiteStockStatus(site) === 'warning'
+            }">
+              @if (site.criticalStockItems > 0) {
+              {{ site.criticalStockItems }} article(s) critique(s)
+              } @else {
+              {{ site.lowStockItems }} article(s) faible(s)
+              }
+            </span>
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </div>
+  }
+
+  <!-- Site Detail View -->
+  @if (selectedSite()) {
+  <div class="space-y-4">
+    <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+      <button (click)="backToSites()" class="hover:text-primary-600 dark:hover:text-primary-400">
+        ← Retour aux sites
+      </button>
+      <span>/</span>
+      <span class="font-semibold text-gray-900 dark:text-white">{{ selectedSite()?.name }}</span>
+    </div>
+
+    <div class="card">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Détails du Site</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <p class="text-xs text-gray-600 dark:text-gray-400 mb-1">Total Articles</p>
+          <p class="text-2xl font-bold text-gray-900 dark:text-white">{{ formatNumber(selectedSite()?.totalItems || 0)
+            }}</p>
+        </div>
+        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <p class="text-xs text-gray-600 dark:text-gray-400 mb-1">Valeur Totale</p>
+          <p class="text-2xl font-bold text-primary-600 dark:text-primary-400">{{
+            formatCurrency(selectedSite()?.totalValue || 0) }}</p>
+        </div>
+        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <p class="text-xs text-gray-600 dark:text-gray-400 mb-1">Stock Faible</p>
+          <p class="text-2xl font-bold text-warning-600 dark:text-warning-400">{{ selectedSite()?.lowStockItems || 0 }}
+          </p>
+        </div>
+        <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <p class="text-xs text-gray-600 dark:text-gray-400 mb-1">Stock Critique</p>
+          <p class="text-2xl font-bold text-danger-600 dark:text-danger-400">{{ selectedSite()?.criticalStockItems || 0
+            }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Transactions Récentes</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-400">{{ selectedSite()?.recentTransactions || 0 }} transactions ce
+        mois</p>
+      <div
+        class="mt-4 p-4 bg-primary-50 dark:bg-primary-900 border border-primary-200 dark:border-primary-700 rounded-lg">
+        <p class="text-sm text-primary-800 dark:text-primary-200">
+          Fonctionnalité de transfert de stock à implémenter ici
+        </p>
+      </div>
+    </div>
+  </div>
+  }
+</div>

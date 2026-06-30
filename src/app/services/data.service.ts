@@ -159,7 +159,20 @@ export interface Project {
   spent: number;
   priority: 'low' | 'medium' | 'high' | 'urgent';
   progress: number;
+  sites?: Site[];
 }
+
+export interface Site {
+  id: string;
+  name: string;
+  location: string;
+  totalItems: number;
+  totalValue: number;
+  lowStockItems: number;
+  criticalStockItems: number;
+  recentTransactions: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
