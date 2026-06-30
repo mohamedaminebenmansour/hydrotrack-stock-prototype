@@ -1,0 +1,222 @@
+[
+  {
+    "id": "routing-001",
+    "productId": "prod-002",
+    "productName": "Tuyau Hydraulique 2 pouces v1.1",
+    "version": "1.1",
+    "name": "Assemblage Tuyau 2\" v1.1",
+    "description": "Processus d'assemblage pour tuyau hydraulique 2 pouces",
+    "estimatedTime": 120,
+    "steps": [
+      {
+        "id": "step-001",
+        "order": 1,
+        "name": "Préparation des matériaux",
+        "description": "Couper le tuyau à longueur, préparer raccords et joints",
+        "duration": 20,
+        "status": "done",
+        "workCenter": "Atelier A",
+        "operator": "Ahmed Ben Ali",
+        "notes": "Matériaux prêts, contrôle qualité effectué"
+      },
+      {
+        "id": "step-002",
+        "order": 2,
+        "name": "Insertion des raccords",
+        "description": "Insérer et sertir les raccords aux deux extrémités",
+        "duration": 30,
+        "status": "done",
+        "workCenter": "Atelier A",
+        "operator": "Ahmed Ben Ali",
+        "notes": "Sertissage conforme aux spécifications"
+      },
+      {
+        "id": "step-003",
+        "order": 3,
+        "name": "Installation des joints",
+        "description": "Poser les joints torique sur les raccords",
+        "duration": 15,
+        "status": "done",
+        "workCenter": "Atelier A",
+        "operator": "Mohamed Trabelsi",
+        "notes": ""
+      },
+      {
+        "id": "step-004",
+        "order": 4,
+        "name": "Test de pression",
+        "description": "Test d'étanchéité à 300 bar pendant 5 minutes",
+        "duration": 25,
+        "status": "in-progress",
+        "workCenter": "Banc d'essai",
+        "operator": "Karim Jaziri",
+        "notes": "Test en cours, pas de fuite détectée jusqu'à présent"
+      },
+      {
+        "id": "step-005",
+        "order": 5,
+        "name": "Contrôle qualité final",
+        "description": "Inspection visuelle et validation dimensions",
+        "duration": 20,
+        "status": "pending",
+        "workCenter": "Contrôle Qualité",
+        "operator": "Sonia Mansouri",
+        "notes": ""
+      },
+      {
+        "id": "step-006",
+        "order": 6,
+        "name": "Emballage et étiquetage",
+        "description": "Emballer et étiqueter avec numéro de lot",
+        "duration": 10,
+        "status": "pending",
+        "workCenter": "Zone d'emballage",
+        "operator": "À assigner",
+        "notes": ""
+      }
+    ]
+  },
+  {
+    "id": "routing-002",
+    "productId": "prod-004",
+    "productName": "Pompe Hydraulique Parker",
+    "version": "2.0",
+    "name": "Assemblage Pompe Parker 50L/min",
+    "description": "Processus d'assemblage et test pompe hydraulique Parker",
+    "estimatedTime": 240,
+    "steps": [
+      {
+        "id": "step-007",
+        "order": 1,
+        "name": "Nettoyage des composants",
+        "description": "Nettoyer tous les composants avant assemblage",
+        "duration": 30,
+        "status": "done",
+        "workCenter": "Atelier B",
+        "operator": "Ali Bouzid",
+        "notes": "Nettoyage ultrason effectué"
+      },
+      {
+        "id": "step-008",
+        "order": 2,
+        "name": "Assemblage mécanique",
+        "description": "Assembler la pompe avec raccords et joints",
+        "duration": 60,
+        "status": "done",
+        "workCenter": "Atelier B",
+        "operator": "Ali Bouzid",
+        "notes": "Couple de serrage vérifié"
+      },
+      {
+        "id": "step-009",
+        "order": 3,
+        "name": "Remplissage d'huile",
+        "description": "Remplir avec huile hydraulique ISO 46",
+        "duration": 20,
+        "status": "done",
+        "workCenter": "Atelier B",
+        "operator": "Mohamed Trabelsi",
+        "notes": "Niveau d'huile vérifié"
+      },
+      {
+        "id": "step-010",
+        "order": 4,
+        "name": "Test de fonctionnement",
+        "description": "Test de fonctionnement à vide puis en charge",
+        "duration": 90,
+        "status": "in-progress",
+        "workCenter": "Banc d'essai",
+        "operator": "Karim Jaziri",
+        "notes": "Test en cours, performances conformes"
+      },
+      {
+        "id": "step-011",
+        "order": 5,
+        "name": "Contrôle qualité et certification",
+        "description": "Inspection finale et délivrance certificat",
+        "duration": 40,
+        "status": "pending",
+        "workCenter": "Contrôle Qualité",
+        "operator": "Sonia Mansouri",
+        "notes": ""
+      }
+    ]
+  },
+  {
+    "id": "routing-003",
+    "productId": "prod-009",
+    "productName": "Cylindre Hydraulique Simple Effet",
+    "version": "1.0",
+    "name": "Assemblage Cylindre SE 100mm",
+    "description": "Processus d'assemblage cylindre hydraulique simple effet",
+    "estimatedTime": 180,
+    "steps": [
+      {
+        "id": "step-012",
+        "order": 1,
+        "name": "Préparation corps de cylindre",
+        "description": "Nettoyer et inspecter le corps de cylindre",
+        "duration": 25,
+        "status": "done",
+        "workCenter": "Atelier C",
+        "operator": "Ahmed Ben Ali",
+        "notes": "Pas de défaut détecté"
+      },
+      {
+        "id": "step-013",
+        "order": 2,
+        "name": "Assemblage piston et tige",
+        "description": "Assembler le piston avec la tige et joints",
+        "duration": 45,
+        "status": "done",
+        "workCenter": "Atelier C",
+        "operator": "Ali Bouzid",
+        "notes": "Jeu vérifié conforme"
+      },
+      {
+        "id": "step-014",
+        "order": 3,
+        "name": "Insertion dans corps",
+        "description": "Insérer l'ensemble piston dans le corps",
+        "duration": 30,
+        "status": "in-progress",
+        "workCenter": "Atelier C",
+        "operator": "Mohamed Trabelsi",
+        "notes": "En cours d'insertion"
+      },
+      {
+        "id": "step-015",
+        "order": 4,
+        "name": "Test d'étanchéité",
+        "description": "Test d'étanchéité à 250 bar",
+        "duration": 40,
+        "status": "pending",
+        "workCenter": "Banc d'essai",
+        "operator": "Karim Jaziri",
+        "notes": ""
+      },
+      {
+        "id": "step-016",
+        "order": 5,
+        "name": "Peinture et marquage",
+        "description": "Peinture de protection et marquage",
+        "duration": 25,
+        "status": "pending",
+        "workCenter": "Zone de peinture",
+        "operator": "À assigner",
+        "notes": ""
+      },
+      {
+        "id": "step-017",
+        "order": 6,
+        "name": "Contrôle final",
+        "description": "Inspection dimensionnelle et fonctionnelle",
+        "duration": 15,
+        "status": "pending",
+        "workCenter": "Contrôle Qualité",
+        "operator": "Sonia Mansouri",
+        "notes": ""
+      }
+    ]
+  }
+]

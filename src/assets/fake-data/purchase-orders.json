@@ -1,0 +1,188 @@
+[
+  {
+    "id": "po-001",
+    "poNumber": "PO-2024-001",
+    "supplier": "Fournisseur Hydraulique Plus",
+    "supplierContact": "+216 71 234 567",
+    "status": "approved",
+    "createdAt": "2024-03-15T09:00:00",
+    "expectedDelivery": "2024-03-22T18:00:00",
+    "items": [
+      {
+        "productId": "prod-007",
+        "productName": "Tuyau Hydraulique 1 pouce",
+        "quantity": 100,
+        "unit": "mètre",
+        "unitPrice": 32.000,
+        "totalPrice": 3200.000
+      },
+      {
+        "productId": "prod-008",
+        "productName": "Flexible Hydraulique 3/4 pouce",
+        "quantity": 50,
+        "unit": "mètre",
+        "unitPrice": 28.000,
+        "totalPrice": 1400.000
+      }
+    ],
+    "totalAmount": 4600.000,
+    "notes": "Commande urgente pour réapprovisionnement stock critique",
+    "createdBy": "Ahmed Ben Ali",
+    "approvedBy": "Directeur Achat",
+    "tracking": [
+      {
+        "status": "draft",
+        "date": "2024-03-15T09:00:00",
+        "user": "Ahmed Ben Ali",
+        "notes": "Brouillon créé"
+      },
+      {
+        "status": "approved",
+        "date": "2024-03-15T14:00:00",
+        "user": "Directeur Achat",
+        "notes": "Approuvé - Urgence justifiée"
+      }
+    ]
+  },
+  {
+    "id": "po-002",
+    "poNumber": "PO-2024-002",
+    "supplier": "Tunisie Hydraulique Services",
+    "supplierContact": "+216 36 345 678",
+    "status": "ordered",
+    "createdAt": "2024-03-18T10:30:00",
+    "expectedDelivery": "2024-03-28T18:00:00",
+    "items": [
+      {
+        "productId": "prod-004",
+        "productName": "Pompe Hydraulique Parker",
+        "quantity": 2,
+        "unit": "pièce",
+        "unitPrice": 1250.000,
+        "totalPrice": 2500.000
+      },
+      {
+        "productId": "prod-005",
+        "productName": "Joint Torique Viton",
+        "quantity": 200,
+        "unit": "pièce",
+        "unitPrice": 3.500,
+        "totalPrice": 700.000
+      }
+    ],
+    "totalAmount": 3200.000,
+    "notes": "Réapprovisionnement pour projet Station Sfax",
+    "createdBy": "Ali Bouzid",
+    "approvedBy": "Directeur Achat",
+    "tracking": [
+      {
+        "status": "draft",
+        "date": "2024-03-18T10:30:00",
+        "user": "Ali Bouzid",
+        "notes": "Brouillon créé"
+      },
+      {
+        "status": "approved",
+        "date": "2024-03-18T15:00:00",
+        "user": "Directeur Achat",
+        "notes": "Approuvé"
+      },
+      {
+        "status": "ordered",
+        "date": "2024-03-19T09:00:00",
+        "user": "Ahmed Ben Ali",
+        "notes": "Commande envoyée au fournisseur"
+      }
+    ]
+  },
+  {
+    "id": "po-003",
+    "poNumber": "PO-2024-003",
+    "supplier": "Industrial Hydraulic Parts",
+    "supplierContact": "+216 71 876 543",
+    "status": "received",
+    "createdAt": "2024-03-10T08:00:00",
+    "expectedDelivery": "2024-03-17T18:00:00",
+    "actualDelivery": "2024-03-16T14:30:00",
+    "items": [
+      {
+        "productId": "prod-010",
+        "productName": "Distributeur Hydraulique 4 voies",
+        "quantity": 10,
+        "unit": "pièce",
+        "unitPrice": 320.000,
+        "totalPrice": 3200.000
+      }
+    ],
+    "totalAmount": 3200.000,
+    "notes": "Réception complète - Bon de réception joint",
+    "createdBy": "Karim Jaziri",
+    "approvedBy": "Directeur Achat",
+    "tracking": [
+      {
+        "status": "draft",
+        "date": "2024-03-10T08:00:00",
+        "user": "Karim Jaziri",
+        "notes": "Brouillon créé"
+      },
+      {
+        "status": "approved",
+        "date": "2024-03-10T12:00:00",
+        "user": "Directeur Achat",
+        "notes": "Approuvé"
+      },
+      {
+        "status": "ordered",
+        "date": "2024-03-10T14:00:00",
+        "user": "Ahmed Ben Ali",
+        "notes": "Commande envoyée"
+      },
+      {
+        "status": "received",
+        "date": "2024-03-16T14:30:00",
+        "user": "Karim Jaziri",
+        "notes": "Réceptionné - Bon de réception scanné",
+        "photo": "assets/images/bon-reception-po003.jpg"
+      }
+    ]
+  },
+  {
+    "id": "po-004",
+    "poNumber": "PO-2024-004",
+    "supplier": "Fournisseur Hydraulique Plus",
+    "supplierContact": "+216 71 234 567",
+    "status": "draft",
+    "createdAt": "2024-03-21T11:00:00",
+    "expectedDelivery": "2024-03-30T18:00:00",
+    "items": [
+      {
+        "productId": "prod-003",
+        "productName": "Raccord Hydraulique 2 pouces",
+        "quantity": 100,
+        "unit": "pièce",
+        "unitPrice": 12.500,
+        "totalPrice": 1250.000
+      },
+      {
+        "productId": "prod-006",
+        "productName": "Huile Hydraulique ISO 46",
+        "quantity": 20,
+        "unit": "bidon 20L",
+        "unitPrice": 85.000,
+        "totalPrice": 1700.000
+      }
+    ],
+    "totalAmount": 2950.000,
+    "notes": "Commande trimestrielle - En attente d'approbation",
+    "createdBy": "Ahmed Ben Ali",
+    "approvedBy": null,
+    "tracking": [
+      {
+        "status": "draft",
+        "date": "2024-03-21T11:00:00",
+        "user": "Ahmed Ben Ali",
+        "notes": "Brouillon créé"
+      }
+    ]
+  }
+]

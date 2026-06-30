@@ -1,0 +1,75 @@
+<div class="space-y-4">
+  <!-- Page Header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Mouvements de Stock</h1>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Historique des entrées et sorties</p>
+  </div>
+
+  <!-- Filter -->
+  <div class="card">
+    <select [value]="selectedType()" (change)="onTypeChange($event)"
+      class="w-full md:w-64 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+      <option value="all">Tous les mouvements</option>
+      <option value="in">Entrées</option>
+      <option value="out">Sorties</option>
+      <option value="adjustment">Ajustements</option>
+    </select>
+  </div>
+
+  <!-- Transactions List -->
+  @for (transaction of transactions(); track transaction.id) {
+  <div class="card hover:shadow-lg transition-shadow">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0 mt-1">
+        <div class="w-10 h-10 rounded-lg flex items-center justify-center"
+          [class]="getTransactionColor(transaction.type)">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              [attr.d]="getTransactionIcon(transaction.type)" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="flex-1 min-w-0">
+        <div class="flex items-start justify-between mb-2">
+          <div>
+            <h3 class="text-sm font-semibold text-gray-900 dark:text-white">{{ transaction.productName }}</h3>
+            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ transaction.notes }}</p>
+          </div>
+          <span class="px-2 py-1 text-xs font-semibold rounded-full" [class]="getTransactionColor(transaction.type)">
+            {{ getTypeLabel(transaction.type) }}
+          </span>
+        </div>
+
+        <div class="flex items-center gap-4 text-xs text-gray-600 dark:text-gray-400 mb-2">
+          <span class="font-medium"
+            [class]="transaction.type === 'in' ? 'text-success-600 dark:text-success-400' : transaction.type === 'out' ? 'text-danger-600 dark:text-danger-400' : 'text-warning-600 dark:text-warning-400'">
+            {{ transaction.type === 'in' ? '+' : transaction.type === 'out' ? '-' : '±' }} {{ transaction.quantity }}
+            {{ transaction.unit }}
+          </span>
+          <span>Réf: {{ transaction.reference }}</span>
+        </div>
+
+        <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-500">
+          <span>{{ transaction.operator }} • {{ transaction.location }}</span>
+          <span>{{ formatDate(transaction.date) }}</span>
+        </div>
+
+        @if (transaction.batchNumber) {
+        <div class="mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
+          <span class="text-xs text-gray-500 dark:text-gray-500">Lot: {{ transaction.batchNumber }}</span>
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  } @empty {
+  <div class="card text-center py-12">
+    <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+    </svg>
+    <p class="text-gray-600 dark:text-gray-400">Aucun mouvement de stock</p>
+  </div>
+  }
+</div>

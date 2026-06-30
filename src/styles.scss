@@ -1,1 +1,88 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary-50: #eff6ff;
+    --color-primary-100: #dbeafe;
+    --color-primary-200: #bfdbfe;
+    --color-primary-300: #93c5fd;
+    --color-primary-400: #60a5fa;
+    --color-primary-500: #3b82f6;
+    --color-primary-600: #2563eb;
+    --color-primary-700: #1d4ed8;
+    --color-primary-800: #1e40af;
+    --color-primary-900: #1e3a8a;
+  }
+
+  .dark {
+    --color-primary-50: #1e3a8a;
+    --color-primary-100: #1e40af;
+    --color-primary-200: #1d4ed8;
+    --color-primary-300: #2563eb;
+    --color-primary-400: #3b82f6;
+    --color-primary-500: #60a5fa;
+    --color-primary-600: #93c5fd;
+    --color-primary-700: #bfdbfe;
+    --color-primary-800: #dbeafe;
+    --color-primary-900: #eff6ff;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-3 rounded-lg font-semibold transition-all duration-200 active:scale-95;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700;
+  }
+
+  .btn-success {
+    @apply bg-success-600 text-white hover:bg-success-700;
+  }
+
+  .btn-warning {
+    @apply bg-warning-500 text-white hover:bg-warning-600;
+  }
+
+  .btn-danger {
+    @apply bg-danger-500 text-white hover:bg-danger-600;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-xl shadow-md p-4 border border-gray-200 dark:border-gray-700;
+  }
+
+  .status-badge {
+    @apply px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .status-success {
+    @apply bg-success-100 text-success-700 dark:bg-success-900 dark:text-success-100;
+  }
+
+  .status-warning {
+    @apply bg-warning-100 text-warning-700 dark:bg-warning-900 dark:text-warning-100;
+  }
+
+  .status-danger {
+    @apply bg-danger-100 text-danger-700 dark:bg-danger-900 dark:text-danger-100;
+  }
+
+  .status-info {
+    @apply bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-100;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}

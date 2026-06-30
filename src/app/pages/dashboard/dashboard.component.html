@@ -1,0 +1,327 @@
+<div class="space-y-6">
+  <!-- Page Header -->
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Dashboard</h1>
+      <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Vue d'ensemble de votre stock et production</p>
+    </div>
+    <button (click)="resetData()"
+      class="px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+      Reset Demo
+    </button>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+    <div class="card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-gray-600 dark:text-gray-400">Valeur Stock</p>
+          <p class="text-xl font-bold text-gray-900 dark:text-white mt-1">{{ formatCurrency(stats().totalStockValue) }}
+          </p>
+        </div>
+        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-gray-600 dark:text-gray-400">Stock Critique</p>
+          <p class="text-xl font-bold text-danger-600 dark:text-danger-400 mt-1">{{ stats().lowStockItems }}</p>
+        </div>
+        <div class="w-12 h-12 bg-danger-100 dark:bg-danger-900 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-danger-600 dark:text-danger-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-gray-600 dark:text-gray-400">Expiration</p>
+          <p class="text-xl font-bold text-warning-600 dark:text-warning-400 mt-1">{{ stats().expiringItems }}</p>
+        </div>
+        <div class="w-12 h-12 bg-warning-100 dark:bg-warning-900 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-warning-600 dark:text-warning-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-gray-600 dark:text-gray-400">Commandes</p>
+          <p class="text-xl font-bold text-primary-600 dark:text-primary-400 mt-1">{{ stats().activeOrders }}</p>
+        </div>
+        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-xs font-medium text-gray-600 dark:text-gray-400">PO en Attente</p>
+          <p class="text-xl font-bold text-warning-600 dark:text-warning-400 mt-1">{{ stats().pendingPOs }}</p>
+        </div>
+        <div class="w-12 h-12 bg-warning-100 dark:bg-warning-900 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-warning-600 dark:text-warning-400" fill="none" stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="card">
+    <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">Actions Rapides</h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <a routerLink="/products"
+        class="flex flex-col items-center gap-2 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+        <svg class="w-8 h-8 text-primary-600 dark:text-primary-400" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+        </svg>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Produits</span>
+      </a>
+      <a routerLink="/orders"
+        class="flex flex-col items-center gap-2 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+        <svg class="w-8 h-8 text-success-600 dark:text-success-400" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+        </svg>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Ordres</span>
+      </a>
+      <a routerLink="/stock"
+        class="flex flex-col items-center gap-2 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+        <svg class="w-8 h-8 text-warning-600 dark:text-warning-400" fill="none" stroke="currentColor"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+        </svg>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Stock</span>
+      </a>
+      <a routerLink="/purchase-orders"
+        class="flex flex-col items-center gap-2 p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+        <svg class="w-8 h-8 text-danger-600 dark:text-danger-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        </svg>
+        <span class="text-sm font-medium text-gray-700 dark:text-gray-300">Achats</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Main Content Grid -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Recent Activity -->
+    <div class="card">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Activité Récente</h2>
+        <span class="text-xs text-gray-500 dark:text-gray-400">10 dernières transactions</span>
+      </div>
+      <div class="space-y-3 max-h-96 overflow-y-auto">
+        @for (transaction of recentTransactions(); track transaction.id) {
+        <div class="flex items-start gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div class="flex-shrink-0 mt-1">
+            <svg class="w-5 h-5 {{ getTransactionColor(transaction.type) }}" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                [attr.d]="getTransactionIcon(transaction.type)" />
+            </svg>
+          </div>
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ transaction.productName }}</p>
+            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">
+              {{ transaction.type === 'in' ? '+' : transaction.type === 'out' ? '-' : '±' }} {{ transaction.quantity }}
+              {{ transaction.unit }}
+            </p>
+            <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">{{ formatDate(transaction.date) }}</p>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+
+    <!-- Low Stock Alert -->
+    <div class="card">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Alertes Stock Critique</h2>
+        <span
+          class="px-2 py-1 text-xs font-semibold bg-danger-100 text-danger-700 dark:bg-danger-900 dark:text-danger-100 rounded-full">
+          {{ lowStockProducts().length }} articles
+        </span>
+      </div>
+      <div class="space-y-3 max-h-96 overflow-y-auto">
+        @for (product of lowStockProducts(); track product.id) {
+        <div class="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div class="flex-1 min-w-0">
+            <p class="text-sm font-medium text-gray-900 dark:text-white truncate">{{ product.name }}</p>
+            <div class="flex items-center gap-2 mt-2">
+              <div class="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                <div class="bg-danger-500 h-2 rounded-full"
+                  [style.width.%]="(product.stockQuantity / product.minStock) * 100"></div>
+              </div>
+              <span class="text-xs font-medium text-danger-600 dark:text-danger-400">
+                {{ product.stockQuantity }}/{{ product.minStock }}
+              </span>
+            </div>
+          </div>
+        </div>
+        }
+        @empty {
+        <p class="text-sm text-gray-500 dark:text-gray-400 text-center py-8">Aucune alerte stock critique</p>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Active Orders & Pending POs -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <!-- Active Orders -->
+    <div class="card">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Ordres en Cours</h2>
+        <a routerLink="/orders"
+          class="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+          Voir tout →
+        </a>
+      </div>
+      <div class="space-y-3">
+        @for (order of activeOrders(); track order.id) {
+        <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">{{ order.orderNumber }}</p>
+              <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ order.productName }}</p>
+            </div>
+            <span class="px-2 py-1 text-xs font-semibold rounded-full {{ getPriorityColor(order.priority) }}">
+              {{ order.priority }}
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+              <div class="bg-primary-500 h-2 rounded-full" [style.width.%]="order.progress"></div>
+            </div>
+            <span class="text-xs font-medium text-gray-700 dark:text-gray-300">{{ order.progress }}%</span>
+          </div>
+        </div>
+        }
+        @empty {
+        <p class="text-sm text-gray-500 dark:text-gray-400 text-center py-8">Aucun ordre en cours</p>
+        }
+      </div>
+    </div>
+
+    <!-- Pending Purchase Orders -->
+    <div class="card">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">Commandes d'Achat</h2>
+        <a routerLink="/purchase-orders"
+          class="text-sm text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300">
+          Voir tout →
+        </a>
+      </div>
+      <div class="space-y-3">
+        @for (po of pendingPOs(); track po.id) {
+        <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+          <div class="flex items-start justify-between mb-2">
+            <div>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">{{ po.poNumber }}</p>
+              <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ po.supplier }}</p>
+            </div>
+            <span class="px-2 py-1 text-xs font-semibold rounded-full {{ getStatusColor(po.status) }}">
+              {{ po.status }}
+            </span>
+          </div>
+          <div class="flex items-center justify-between mt-2">
+            <p class="text-xs text-gray-600 dark:text-gray-400">Livraison: {{ formatDate(po.expectedDelivery) }}</p>
+            <p class="text-sm font-semibold text-gray-900 dark:text-white">{{ formatCurrency(po.totalAmount) }}</p>
+          </div>
+        </div>
+        }
+        @empty {
+        <p class="text-sm text-gray-500 dark:text-gray-400 text-center py-8">Aucune commande en attente</p>
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- MES Value Proposition -->
+  <div
+    class="card bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900 dark:to-primary-800 border-primary-200 dark:border-primary-700">
+    <div class="flex items-start gap-4">
+      <div class="flex-shrink-0">
+        <div class="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+      </div>
+      <div class="flex-1">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">HydroTrack MES - Gestion Intelligente</h3>
+        <p class="text-sm text-gray-700 dark:text-gray-300 mb-3">
+          Système MES (Manufacturing Execution System) spécialement conçu pour les entreprises hydrauliques en Tunisie.
+          Gérez votre stock, vos ordres de fabrication et vos approvisionnements en temps réel.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-success-600 dark:text-success-400 mt-0.5" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">Auto PO</p>
+              <p class="text-xs text-gray-600 dark:text-gray-400">Économise 3 jours de délai</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-success-600 dark:text-success-400 mt-0.5" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">Traçabilité</p>
+              <p class="text-xs text-gray-600 dark:text-gray-400">Suivi complet des lots</p>
+            </div>
+          </div>
+          <div class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-success-600 dark:text-success-400 mt-0.5" fill="none" stroke="currentColor"
+              viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <div>
+              <p class="text-sm font-medium text-gray-900 dark:text-white">Mobile First</p>
+              <p class="text-xs text-gray-600 dark:text-gray-400">Utilisable sur le terrain</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

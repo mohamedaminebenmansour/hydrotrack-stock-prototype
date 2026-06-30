@@ -1,0 +1,309 @@
+[
+  {
+    "id": "prod-001",
+    "name": "Tuyau Hydraulique 2 pouces",
+    "nameAr": "خرطوم هيدروليكي 2 بوصة",
+    "category": "hose",
+    "sku": "HOSE-2IN-V1.0",
+    "currentVersion": "1.0",
+    "unit": "mètre",
+    "unitPrice": 45.000,
+    "stockQuantity": 150,
+    "minStock": 50,
+    "location": "Entrepôt Principal",
+    "expiryDate": null,
+    "image": "assets/images/hose-2inch.jpg",
+    "description": "Tuyau hydraulique haute pression 2 pouces, pression de travail 250 bar",
+    "specifications": {
+      "diameter": "2 pouces",
+      "pressure": "250 bar",
+      "material": "NBR/Polyester",
+      "temperature": "-40°C à +100°C"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-01-15",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-002",
+    "name": "Tuyau Hydraulique 2 pouces v1.1",
+    "nameAr": "خرطوم هيدروليكي 2 بوصة v1.1",
+    "category": "hose",
+    "sku": "HOSE-2IN-V1.1",
+    "currentVersion": "1.1",
+    "unit": "mètre",
+    "unitPrice": 48.500,
+    "stockQuantity": 80,
+    "minStock": 30,
+    "location": "Entrepôt Principal",
+    "expiryDate": null,
+    "image": "assets/images/hose-2inch-v11.jpg",
+    "description": "Tuyau hydraulique amélioré avec renfort spiralé, pression de travail 300 bar",
+    "specifications": {
+      "diameter": "2 pouces",
+      "pressure": "300 bar",
+      "material": "NBR/Polyester renforcé",
+      "temperature": "-40°C à +120°C"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-01-15",
+        "changes": "Version initiale",
+        "active": false
+      },
+      {
+        "version": "1.1",
+        "releaseDate": "2024-03-20",
+        "changes": "Ajout renfort spiralé, augmentation pression à 300 bar",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-003",
+    "name": "Raccord Hydraulique 2 pouces",
+    "nameAr": "وصل هيدروليكي 2 بوصة",
+    "category": "fitting",
+    "sku": "FITTING-2IN",
+    "currentVersion": "1.0",
+    "unit": "pièce",
+    "unitPrice": 12.500,
+    "stockQuantity": 200,
+    "minStock": 100,
+    "location": "Entrepôt Principal",
+    "expiryDate": null,
+    "image": "assets/images/fitting-2inch.jpg",
+    "description": "Raccord droit femelle 2 pouces filetage BSP",
+    "specifications": {
+      "diameter": "2 pouces",
+      "thread": "BSP 2\"",
+      "material": "Acier carbone zingué"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-02-01",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-004",
+    "name": "Pompe Hydraulique Parker",
+    "nameAr": "مضخة هيدروليكية باركر",
+    "category": "pump",
+    "sku": "PUMP-PARKER-50",
+    "currentVersion": "2.0",
+    "unit": "pièce",
+    "unitPrice": 1250.000,
+    "stockQuantity": 5,
+    "minStock": 3,
+    "location": "Atelier Sfax",
+    "expiryDate": null,
+    "image": "assets/images/pump-parker.jpg",
+    "description": "Pompe hydraulique Parker 50 L/min, 250 bar",
+    "specifications": {
+      "flowRate": "50 L/min",
+      "pressure": "250 bar",
+      "brand": "Parker",
+      "model": "PGP511"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2023-06-01",
+        "changes": "Version initiale",
+        "active": false
+      },
+      {
+        "version": "2.0",
+        "releaseDate": "2024-01-10",
+        "changes": "Amélioration joints, réduction bruit",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-005",
+    "name": "Joint Torique Viton",
+    "nameAr": "حلقة مطاطية فيتون",
+    "category": "seal",
+    "sku": "SEAL-VITON-50",
+    "currentVersion": "1.0",
+    "unit": "pièce",
+    "unitPrice": 3.500,
+    "stockQuantity": 500,
+    "minStock": 200,
+    "location": "Entrepôt Principal",
+    "expiryDate": "2026-12-31",
+    "image": "assets/images/seal-viton.jpg",
+    "description": "Joint torique Viton pour étanchéité hydraulique",
+    "specifications": {
+      "material": "Viton FKM",
+      "temperature": "-20°C à +200°C",
+      "hardness": "70 Shore A"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-01-01",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-006",
+    "name": "Huile Hydraulique ISO 46",
+    "nameAr": "زيت هيدروليكي ISO 46",
+    "category": "oil",
+    "sku": "OIL-ISO46-20L",
+    "currentVersion": "1.0",
+    "unit": "bidon 20L",
+    "unitPrice": 85.000,
+    "stockQuantity": 25,
+    "minStock": 10,
+    "location": "Entrepôt Principal",
+    "expiryDate": "2025-06-30",
+    "image": "assets/images/oil-iso46.jpg",
+    "description": "Huile hydraulique ISO VG 46, bidon 20 litres",
+    "specifications": {
+      "viscosity": "ISO VG 46",
+      "volume": "20 litres",
+      "type": "Minéral"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-02-15",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-007",
+    "name": "Tuyau Hydraulique 1 pouce",
+    "nameAr": "خرطوم هيدروليكي 1 بوصة",
+    "category": "hose",
+    "sku": "HOSE-1IN-V1.0",
+    "currentVersion": "1.0",
+    "unit": "mètre",
+    "unitPrice": 32.000,
+    "stockQuantity": 8,
+    "minStock": 40,
+    "location": "Entrepôt Principal",
+    "expiryDate": null,
+    "image": "assets/images/hose-1inch.jpg",
+    "description": "Tuyau hydraulique 1 pouce, pression de travail 200 bar - STOCK CRITIQUE",
+    "specifications": {
+      "diameter": "1 pouce",
+      "pressure": "200 bar",
+      "material": "NBR/Polyester"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-01-20",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-008",
+    "name": "Flexible Hydraulique 3/4 pouce",
+    "nameAr": "خرطوم مرن هيدروليكي 3/4 بوصة",
+    "category": "hose",
+    "sku": "HOSE-3/4IN",
+    "currentVersion": "1.0",
+    "unit": "mètre",
+    "unitPrice": 28.000,
+    "stockQuantity": 0,
+    "minStock": 25,
+    "location": "Entrepôt Kairouan",
+    "expiryDate": null,
+    "image": "assets/images/hose-3-4inch.jpg",
+    "description": "Flexible hydraulique 3/4 pouce - RUPTURE DE STOCK",
+    "specifications": {
+      "diameter": "3/4 pouce",
+      "pressure": "180 bar",
+      "material": "NBR"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-02-01",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-009",
+    "name": "Cylindre Hydraulique Simple Effet",
+    "nameAr": "مكبس هيدروليكي مفرد التأثير",
+    "category": "cylinder",
+    "sku": "CYLINDER-SE-100",
+    "currentVersion": "1.0",
+    "unit": "pièce",
+    "unitPrice": 450.000,
+    "stockQuantity": 12,
+    "minStock": 5,
+    "location": "Atelier Sfax",
+    "expiryDate": null,
+    "image": "assets/images/cylinder-se.jpg",
+    "description": "Cylindre hydraulique simple effet 100mm course 500mm",
+    "specifications": {
+      "type": "Simple effet",
+      "bore": "100 mm",
+      "stroke": "500 mm",
+      "pressure": "250 bar"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-01-05",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  },
+  {
+    "id": "prod-010",
+    "name": "Distributeur Hydraulique 4 voies",
+    "nameAr": "موزع هيدروليكي 4 اتجاهات",
+    "category": "valve",
+    "sku": "VALVE-4WAY",
+    "currentVersion": "1.0",
+    "unit": "pièce",
+    "unitPrice": 320.000,
+    "stockQuantity": 15,
+    "minStock": 8,
+    "location": "Entrepôt Principal",
+    "expiryDate": null,
+    "image": "assets/images/valve-4way.jpg",
+    "description": "Distributeur hydraulique 4 voies 3 positions, commande manuelle",
+    "specifications": {
+      "ways": "4",
+      "positions": "3",
+      "control": "Manuelle",
+      "flow": "80 L/min"
+    },
+    "versions": [
+      {
+        "version": "1.0",
+        "releaseDate": "2024-02-10",
+        "changes": "Version initiale",
+        "active": true
+      }
+    ]
+  }
+]

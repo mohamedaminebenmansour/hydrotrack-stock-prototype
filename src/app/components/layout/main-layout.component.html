@@ -1,0 +1,116 @@
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+  <!-- Desktop Sidebar -->
+  <aside
+    class="hidden md:flex md:flex-col md:fixed md:inset-y-0 md:w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700">
+    <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+      <div class="flex items-center justify-center flex-shrink-0 px-4 mb-8">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <div>
+            <h1 class="text-xl font-bold text-gray-900 dark:text-white">HydroTrack</h1>
+            <p class="text-xs text-gray-500 dark:text-gray-400">MES Stock Manager</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="flex-1 px-4 space-y-2">
+        @for (item of navItems; track item.path) {
+        <a [routerLink]="item.path"
+          routerLinkActive="bg-primary-50 dark:bg-primary-900 text-primary-600 dark:text-primary-400"
+          class="flex items-center gap-3 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="item.icon" />
+          </svg>
+          <span>{{ getNavItemLabel(item) }}</span>
+          @if (item.badge) {
+          <span class="ml-auto bg-danger-500 text-white text-xs font-bold px-2 py-0.5 rounded-full">
+            {{ item.badge }}
+          </span>
+          }
+        </a>
+        }
+      </nav>
+    </div>
+
+    <div class="flex-shrink-0 p-4 border-t border-gray-200 dark:border-gray-700">
+      <button (click)="toggleTheme()"
+        class="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">
+        @if (isDarkMode()) {
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+        <span>Light Mode</span>
+        } @else {
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+        <span>Dark Mode</span>
+        }
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile Bottom Navigation -->
+  <nav
+    class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 z-50">
+    <div class="grid grid-cols-5 gap-1 px-2 py-2">
+      @for (item of navItems; track item.path) {
+      <a [routerLink]="item.path" routerLinkActive="text-primary-600 dark:text-primary-400"
+        class="flex flex-col items-center justify-center gap-1 px-2 py-2 text-xs font-medium text-gray-600 dark:text-gray-400 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors relative">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" [attr.d]="item.icon" />
+        </svg>
+        <span class="truncate">{{ getNavItemLabel(item) }}</span>
+        @if (item.badge) {
+        <span
+          class="absolute top-1 right-1 bg-danger-500 text-white text-xs font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">
+          {{ item.badge }}
+        </span>
+        }
+      </a>
+      }
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="md:pl-64 pb-20 md:pb-0">
+    <div class="py-6">
+      <!-- Mobile Header -->
+      <div
+        class="md:hidden px-4 py-3 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+          <h1 class="text-lg font-bold text-gray-900 dark:text-white">HydroTrack</h1>
+        </div>
+        <button (click)="toggleTheme()"
+          class="p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors">
+          @if (isDarkMode()) {
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          } @else {
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+          }
+        </button>
+      </div>
+
+      <div class="px-4 sm:px-6 lg:px-8">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </main>
+</div>

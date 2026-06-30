@@ -1,0 +1,87 @@
+<div class="space-y-4">
+  <!-- Page Header -->
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-white">Catalogue Produits</h1>
+    <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">Gestion des produits et versions</p>
+  </div>
+
+  <!-- Search & Filter -->
+  <div class="card">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div>
+        <input type="text" [value]="searchQuery()" (input)="onSearchChange($event)"
+          placeholder="Rechercher par nom, SKU..."
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-500">
+      </div>
+      <div>
+        <select [value]="selectedCategory()" (change)="onCategoryChange($event)"
+          class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500">
+          @for (cat of categories; track cat.value) {
+          <option [value]="cat.value">{{ cat.label }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Products Grid -->
+  @for (product of filteredProducts(); track product.id) {
+  <a [routerLink]="'/products/' + product.id" class="card hover:shadow-lg transition-shadow cursor-pointer">
+    <div class="flex items-start gap-3">
+      <div class="w-16 h-16 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+        </svg>
+      </div>
+      <div class="flex-1 min-w-0">
+        <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate">{{ product.name }}</h3>
+        <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">{{ product.sku }}</p>
+        <div class="flex items-center gap-2 mt-2">
+          <span
+            class="px-2 py-0.5 text-xs font-medium bg-primary-100 text-primary-700 dark:bg-primary-900 dark:text-primary-300 rounded">
+            v{{ product.currentVersion }}
+          </span>
+          @if (getExpiryStatus(product)) {
+          <span
+            class="px-2 py-0.5 text-xs font-medium bg-warning-100 text-warning-700 dark:bg-warning-900 dark:text-warning-300 rounded">
+            {{ getExpiryStatus(product) }}
+          </span>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs text-gray-600 dark:text-gray-400">Stock</span>
+        <span class="text-xs font-medium text-gray-900 dark:text-white">{{ product.stockQuantity }} {{ product.unit
+          }}</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <div class="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+          <div class="h-2 rounded-full transition-all" [class]="'bg-' + getStockStatus(product).color + '-500'"
+            [style.width.%]="getStockPercentage(product)"></div>
+        </div>
+        <span class="text-xs font-medium px-2 py-0.5 rounded-full"
+          [class]="'bg-' + getStockStatus(product).color + '-100 text-' + getStockStatus(product).color + '-700 dark:bg-' + getStockStatus(product).color + '-900 dark:text-' + getStockStatus(product).color + '-100'">
+          {{ getStockStatus(product).label }}
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-3 flex items-center justify-between">
+      <span class="text-xs text-gray-600 dark:text-gray-400">{{ product.location }}</span>
+      <span class="text-sm font-semibold text-gray-900 dark:text-white">{{ formatCurrency(product.unitPrice) }}</span>
+    </div>
+  </a>
+  } @empty {
+  <div class="card text-center py-12">
+    <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+    </svg>
+    <p class="text-gray-600 dark:text-gray-400">Aucun produit trouvé</p>
+  </div>
+  }
+</div>

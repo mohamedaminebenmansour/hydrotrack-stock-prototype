@@ -1,0 +1,186 @@
+[
+  {
+    "id": "bom-001",
+    "productId": "prod-002",
+    "productName": "Tuyau Hydraulique 2 pouces v1.1",
+    "version": "1.1",
+    "name": "BOM Tuyau 2\" v1.1 - Standard",
+    "description": "Bill of Materials pour assemblage tuyau hydraulique 2 pouces version 1.1",
+    "totalCost": 65.750,
+    "items": [
+      {
+        "id": "bom-item-001",
+        "productId": "prod-002",
+        "productName": "Tuyau Hydraulique 2 pouces v1.1",
+        "quantity": 10,
+        "unit": "mètre",
+        "unitCost": 48.500,
+        "totalCost": 485.000,
+        "level": 0
+      },
+      {
+        "id": "bom-item-002",
+        "productId": "prod-003",
+        "productName": "Raccord Hydraulique 2 pouces",
+        "quantity": 20,
+        "unit": "pièce",
+        "unitCost": 12.500,
+        "totalCost": 250.000,
+        "level": 1
+      },
+      {
+        "id": "bom-item-003",
+        "productId": "prod-005",
+        "productName": "Joint Torique Viton",
+        "quantity": 40,
+        "unit": "pièce",
+        "unitCost": 3.500,
+        "totalCost": 140.000,
+        "level": 1
+      }
+    ]
+  },
+  {
+    "id": "bom-002",
+    "productId": "prod-004",
+    "productName": "Pompe Hydraulique Parker",
+    "version": "2.0",
+    "name": "BOM Pompe Parker 50L/min",
+    "description": "Bill of Materials pour assemblage pompe hydraulique Parker",
+    "totalCost": 1320.000,
+    "items": [
+      {
+        "id": "bom-item-004",
+        "productId": "prod-004",
+        "productName": "Pompe Hydraulique Parker",
+        "quantity": 1,
+        "unit": "pièce",
+        "unitCost": 1250.000,
+        "totalCost": 1250.000,
+        "level": 0
+      },
+      {
+        "id": "bom-item-005",
+        "productId": "prod-003",
+        "productName": "Raccord Hydraulique 2 pouces",
+        "quantity": 4,
+        "unit": "pièce",
+        "unitCost": 12.500,
+        "totalCost": 50.000,
+        "level": 1
+      },
+      {
+        "id": "bom-item-006",
+        "productId": "prod-005",
+        "productName": "Joint Torique Viton",
+        "quantity": 8,
+        "unit": "pièce",
+        "unitCost": 3.500,
+        "totalCost": 28.000,
+        "level": 1
+      },
+      {
+        "id": "bom-item-007",
+        "productId": "prod-006",
+        "productName": "Huile Hydraulique ISO 46",
+        "quantity": 1,
+        "unit": "bidon 20L",
+        "unitCost": 85.000,
+        "totalCost": 85.000,
+        "level": 1
+      }
+    ]
+  },
+  {
+    "id": "bom-003",
+    "productId": "prod-009",
+    "productName": "Cylindre Hydraulique Simple Effet",
+    "version": "1.0",
+    "name": "BOM Cylindre SE 100mm",
+    "description": "Bill of Materials pour assemblage cylindre hydraulique simple effet",
+    "totalCost": 520.000,
+    "items": [
+      {
+        "id": "bom-item-008",
+        "productId": "prod-009",
+        "productName": "Cylindre Hydraulique Simple Effet",
+        "quantity": 1,
+        "unit": "pièce",
+        "unitCost": 450.000,
+        "totalCost": 450.000,
+        "level": 0
+      },
+      {
+        "id": "bom-item-009",
+        "productId": "prod-003",
+        "productName": "Raccord Hydraulique 2 pouces",
+        "quantity": 2,
+        "unit": "pièce",
+        "unitCost": 12.500,
+        "totalCost": 25.000,
+        "level": 1
+      },
+      {
+        "id": "bom-item-010",
+        "productId": "prod-005",
+        "productName": "Joint Torique Viton",
+        "quantity": 12,
+        "unit": "pièce",
+        "unitCost": 3.500,
+        "totalCost": 42.000,
+        "level": 1
+      },
+      {
+        "id": "bom-item-011",
+        "productId": "prod-006",
+        "productName": "Huile Hydraulique ISO 46",
+        "quantity": 0.5,
+        "unit": "bidon 20L",
+        "unitCost": 85.000,
+        "totalCost": 42.500,
+        "level": 1
+      }
+    ]
+  },
+  {
+    "id": "bom-004",
+    "productId": "prod-010",
+    "productName": "Distributeur Hydraulique 4 voies",
+    "version": "1.0",
+    "name": "BOM Distributeur 4 voies",
+    "description": "Bill of Materials pour assemblage distributeur hydraulique",
+    "totalCost": 385.000,
+    "items": [
+      {
+        "id": "bom-item-012",
+        "productId": "prod-010",
+        "productName": "Distributeur Hydraulique 4 voies",
+        "quantity": 1,
+        "unit": "pièce",
+        "unitCost": 320.000,
+        "totalCost": 320.000,
+        "level": 0
+      },
+      {
+        "id": "bom-item-013",
+        "productId": "prod-005",
+        "productName": "Joint Torique Viton",
+        "quantity": 15,
+        "unit": "pièce",
+        "unitCost": 3.500,
+        "totalCost": 52.500,
+        "level": 1
+      },
+      {
+        "id": "bom-item-014",
+        "productId": "prod-006",
+        "productName": "Huile Hydraulique ISO 46",
+        "quantity": 0.15,
+        "unit": "bidon 20L",
+        "unitCost": 85.000,
+        "totalCost": 12.750,
+        "level": 1
+      }
+    ]
+  }
+]
