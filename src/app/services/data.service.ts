@@ -173,6 +173,86 @@ export interface Site {
   recentTransactions: number;
 }
 
+// ========== NEW CROSS-ROLE MODELS ==========
+
+export interface Subcontractor {
+  id: string;
+  name: string;
+  phone: string;
+  specialty: string;
+  rating: number;
+  currentSite: string;
+  status: 'available' | 'busy' | 'completed';
+}
+
+export interface MaterialRequest {
+  id: string;
+  subcontractorName: string;
+  siteId: string;
+  siteName: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  unit: string;
+  status: 'pending' | 'approved' | 'rejected' | 'delivered';
+  createdAt: string;
+  resolvedAt?: string;
+  notes: string;
+}
+
+export interface MaterialConsumption {
+  id: string;
+  requestId: string;
+  subcontractorName: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  unit: string;
+  date: string;
+  siteName: string;
+  photoUrl: string;
+  notes: string;
+}
+
+export interface MaterialReturn {
+  id: string;
+  subcontractorName: string;
+  productId: string;
+  productName: string;
+  quantity: number;
+  unit: string;
+  date: string;
+  siteName: string;
+  notes: string;
+}
+
+// ========== DEFAULT FAKE SUBCONTRACTORS ==========
+const DEFAULT_SUBCONTRACTORS: Subcontractor[] = [
+  { id: 'sub-001', name: 'Ahmed Hydraulique', phone: '+216 98 123 456', specialty: 'Installation tuyauterie haute pression et raccords', rating: 5, currentSite: 'Site Kairouan', status: 'busy' },
+  { id: 'sub-002', name: 'Karim Soudure', phone: '+216 20 234 567', specialty: 'Soudure TIG/MIG et fabrication métallique', rating: 4, currentSite: 'Site Sfax', status: 'busy' },
+  { id: 'sub-003', name: 'Mohamed Ben Ali', phone: '+216 22 345 678', specialty: 'Maintenance hydraulique et dépannage', rating: 4, currentSite: 'Site Tunis', status: 'busy' },
+  { id: 'sub-004', name: 'Société Générale TP', phone: '+216 71 456 789', specialty: 'Travaux publics et génie civil', rating: 4, currentSite: 'Site Sousse', status: 'available' },
+];
+
+const DEFAULT_CONTACTS = [
+  // Drivers (Chauffeurs)
+  { name: 'Hassen Hamdi', role: 'Chauffeur Poids Lourd', category: 'Chauffeurs', rating: 5, phone: '+216 50 123 456', distance: '5 km du site Kairouan' },
+  { name: 'Montassar Gharbi', role: 'Chauffeur Livraison', category: 'Chauffeurs', rating: 4, phone: '+216 52 234 567', distance: '8 km du site Sfax' },
+  { name: 'Wassim Ben Ammar', role: 'Chauffeur Benne', category: 'Chauffeurs', rating: 4, phone: '+216 54 345 678', distance: '3 km du site Tunis' },
+  // Welders (Soudeurs)
+  { name: 'Karim Soudure', role: 'Soudeur Industriel', category: 'Soudeurs', rating: 5, phone: '+216 98 456 789', distance: '2 km du site Kairouan' },
+  { name: 'Houssem Dridi', role: 'Soudeur TIG/MIG', category: 'Soudeurs', rating: 4, phone: '+216 20 567 890', distance: '10 km du site Sfax' },
+  { name: 'Kamel Mechergui', role: 'Soudeur Haute Pression', category: 'Soudeurs', rating: 5, phone: '+216 22 678 901', distance: '6 km du site Tunis' },
+  // Mechanics
+  { name: 'Mehdi Trabelsi', role: 'Mécanicien Hydraulique', category: 'Mécaniciens', rating: 5, phone: '+216 23 789 012', distance: '4 km du site Kairouan' },
+  { name: 'Youssef Kacem', role: 'Mécanicien Diesel', category: 'Mécaniciens', rating: 4, phone: '+216 25 890 123', distance: '7 km du site Sfax' },
+  { name: 'Skander Belaid', role: 'Mécanicien Engins TP', category: 'Mécaniciens', rating: 4, phone: '+216 27 901 234', distance: '12 km du site Tunis' },
+  // Suppliers
+  { name: 'HydraParts Tunisie', role: 'Fournisseur Pièces Hydrauliques', category: 'Fournisseurs', rating: 4, phone: '+216 71 012 345', distance: '15 km du site Kairouan' },
+  { name: 'Aciers & Métaux TN', role: 'Fournisseur Acier et Tôles', category: 'Fournisseurs', rating: 3, phone: '+216 72 123 456', distance: '20 km du site Sfax' },
+  { name: 'Pompes & Moteurs Sfax', role: 'Fournisseur Pompes et Moteurs', category: 'Fournisseurs', rating: 5, phone: '+216 74 234 567', distance: '1 km du site Sfax' },
+];
+
 
 @Injectable({
   providedIn: 'root'
@@ -185,7 +265,11 @@ export class DataService {
     orders: 'hydrotrack_orders',
     purchaseOrders: 'hydrotrack_purchaseOrders',
     transactions: 'hydrotrack_transactions',
-    projects: 'hydrotrack_projects'
+    projects: 'hydrotrack_projects',
+    subcontractors: 'hydrotrack_subcontractors',
+    materialRequests: 'hydrotrack_materialRequests',
+    materialConsumptions: 'hydrotrack_materialConsumptions',
+    materialReturns: 'hydrotrack_materialReturns'
   };
 
   private productsSubject = new BehaviorSubject<Product[]>([]);
@@ -195,6 +279,10 @@ export class DataService {
   private purchaseOrdersSubject = new BehaviorSubject<PurchaseOrder[]>([]);
   private transactionsSubject = new BehaviorSubject<Transaction[]>([]);
   private projectsSubject = new BehaviorSubject<Project[]>([]);
+  private subcontractorsSubject = new BehaviorSubject<Subcontractor[]>([]);
+  private materialRequestsSubject = new BehaviorSubject<MaterialRequest[]>([]);
+  private materialConsumptionsSubject = new BehaviorSubject<MaterialConsumption[]>([]);
+  private materialReturnsSubject = new BehaviorSubject<MaterialReturn[]>([]);
 
   products$ = this.productsSubject.asObservable();
   boms$ = this.bomsSubject.asObservable();
@@ -203,6 +291,10 @@ export class DataService {
   purchaseOrders$ = this.purchaseOrdersSubject.asObservable();
   transactions$ = this.transactionsSubject.asObservable();
   projects$ = this.projectsSubject.asObservable();
+  subcontractors$ = this.subcontractorsSubject.asObservable();
+  materialRequests$ = this.materialRequestsSubject.asObservable();
+  materialConsumptions$ = this.materialConsumptionsSubject.asObservable();
+  materialReturns$ = this.materialReturnsSubject.asObservable();
 
   private isInitialized = false;
   private initPromise: Promise<void> | null = null;
@@ -246,6 +338,21 @@ export class DataService {
     this.purchaseOrdersSubject.next(purchaseOrders);
     this.transactionsSubject.next(transactions);
     this.projectsSubject.next(projects);
+
+    // Initialize cross-role data with defaults if not in localStorage
+    this.subcontractorsSubject.next(await this.loadOrInit(this.STORAGE_KEYS.subcontractors, DEFAULT_SUBCONTRACTORS));
+    this.materialRequestsSubject.next(await this.loadOrInit(this.STORAGE_KEYS.materialRequests, []));
+    this.materialConsumptionsSubject.next(await this.loadOrInit(this.STORAGE_KEYS.materialConsumptions, []));
+    this.materialReturnsSubject.next(await this.loadOrInit(this.STORAGE_KEYS.materialReturns, []));
+  }
+
+  private async loadOrInit<T>(key: string, defaultData: T[]): Promise<T[]> {
+    const stored = localStorage.getItem(key);
+    if (stored) {
+      return JSON.parse(stored) as T[];
+    }
+    localStorage.setItem(key, JSON.stringify(defaultData));
+    return defaultData;
   }
 
   private async loadFromStorageOrFetch<T>(storageKey: string, url: string): Promise<T[]> {
@@ -475,13 +582,175 @@ export class DataService {
     return of(this.projectsSubject.value.find(p => p.id === id));
   }
 
-  // Dashboard Stats
+  // ========== CROSS-ROLE METHODS ==========
+
+  // Subcontractors
+  getSubcontractors(): Observable<Subcontractor[]> {
+    this.ensureInitialized();
+    return of(this.subcontractorsSubject.value);
+  }
+
+  getSubcontractor(name: string): Subcontractor | undefined {
+    return this.subcontractorsSubject.value.find(s => s.name === name);
+  }
+
+  // Material Requests
+  getMaterialRequests(): Observable<MaterialRequest[]> {
+    this.ensureInitialized();
+    return of(this.materialRequestsSubject.value);
+  }
+
+  getPendingRequests(): MaterialRequest[] {
+    return this.materialRequestsSubject.value.filter(r => r.status === 'pending');
+  }
+
+  addMaterialRequest(req: Omit<MaterialRequest, 'id' | 'createdAt' | 'status'>): Observable<MaterialRequest> {
+    this.ensureInitialized();
+    const requests = [...this.materialRequestsSubject.value];
+    const newRequest: MaterialRequest = {
+      ...req,
+      id: `req-${Date.now()}`,
+      status: 'pending',
+      createdAt: new Date().toISOString()
+    };
+    requests.unshift(newRequest);
+    this.materialRequestsSubject.next(requests);
+    this.saveToStorage(this.STORAGE_KEYS.materialRequests, requests);
+
+    // Log transaction
+    this.addTransaction({
+      type: 'out',
+      productId: req.productId,
+      productName: req.productName,
+      quantity: req.quantity,
+      unit: req.unit,
+      reference: `REQ-${newRequest.id}`,
+      operator: req.subcontractorName,
+      location: req.siteName,
+      notes: `Demande matériel - ${req.subcontractorName}`,
+      photo: null,
+      batchNumber: null
+    });
+
+    return of(newRequest);
+  }
+
+  approveRequest(requestId: string): Observable<MaterialRequest | null> {
+    const requests = [...this.materialRequestsSubject.value];
+    const index = requests.findIndex(r => r.id === requestId);
+    if (index === -1) return of(null);
+
+    requests[index] = { ...requests[index], status: 'approved', resolvedAt: new Date().toISOString() };
+    this.materialRequestsSubject.next(requests);
+    this.saveToStorage(this.STORAGE_KEYS.materialRequests, requests);
+    return of(requests[index]);
+  }
+
+  rejectRequest(requestId: string): Observable<MaterialRequest | null> {
+    const requests = [...this.materialRequestsSubject.value];
+    const index = requests.findIndex(r => r.id === requestId);
+    if (index === -1) return of(null);
+
+    requests[index] = { ...requests[index], status: 'rejected', resolvedAt: new Date().toISOString() };
+    this.materialRequestsSubject.next(requests);
+    this.saveToStorage(this.STORAGE_KEYS.materialRequests, requests);
+    return of(requests[index]);
+  }
+
+  // Material Consumptions
+  getMaterialConsumptions(): Observable<MaterialConsumption[]> {
+    this.ensureInitialized();
+    return of(this.materialConsumptionsSubject.value);
+  }
+
+  getConsumptionsBySubcontractor(name: string): MaterialConsumption[] {
+    return this.materialConsumptionsSubject.value.filter(c => c.subcontractorName === name);
+  }
+
+  reportConsumption(consumption: Omit<MaterialConsumption, 'id' | 'date'>): Observable<MaterialConsumption> {
+    this.ensureInitialized();
+    const consumptions = [...this.materialConsumptionsSubject.value];
+    const newConsumption: MaterialConsumption = {
+      ...consumption,
+      id: `cons-${Date.now()}`,
+      date: new Date().toISOString()
+    };
+    consumptions.unshift(newConsumption);
+    this.materialConsumptionsSubject.next(consumptions);
+    this.saveToStorage(this.STORAGE_KEYS.materialConsumptions, consumptions);
+
+    // Update product stock - decrease
+    this.updateProductStock(consumption.productId, consumption.quantity, 'out');
+
+    // Log transaction
+    this.addTransaction({
+      type: 'out',
+      productId: consumption.productId,
+      productName: consumption.productName,
+      quantity: consumption.quantity,
+      unit: consumption.unit,
+      reference: `CONS-${newConsumption.id}`,
+      operator: consumption.subcontractorName,
+      location: consumption.siteName,
+      notes: `Consommation - ${consumption.subcontractorName}: ${consumption.notes}`,
+      photo: consumption.photoUrl || null,
+      batchNumber: null
+    });
+
+    return of(newConsumption);
+  }
+
+  // Material Returns
+  getMaterialReturns(): Observable<MaterialReturn[]> {
+    this.ensureInitialized();
+    return of(this.materialReturnsSubject.value);
+  }
+
+  getReturnsBySubcontractor(name: string): MaterialReturn[] {
+    return this.materialReturnsSubject.value.filter(r => r.subcontractorName === name);
+  }
+
+  returnMaterial(ret: Omit<MaterialReturn, 'id' | 'date'>): Observable<MaterialReturn> {
+    this.ensureInitialized();
+    const returns = [...this.materialReturnsSubject.value];
+    const newReturn: MaterialReturn = {
+      ...ret,
+      id: `ret-${Date.now()}`,
+      date: new Date().toISOString()
+    };
+    returns.unshift(newReturn);
+    this.materialReturnsSubject.next(returns);
+    this.saveToStorage(this.STORAGE_KEYS.materialReturns, returns);
+
+    // Update product stock - increase
+    this.updateProductStock(ret.productId, ret.quantity, 'in');
+
+    // Log transaction
+    this.addTransaction({
+      type: 'in',
+      productId: ret.productId,
+      productName: ret.productName,
+      quantity: ret.quantity,
+      unit: ret.unit,
+      reference: `RET-${newReturn.id}`,
+      operator: ret.subcontractorName,
+      location: ret.siteName,
+      notes: `Retour matériel - ${ret.subcontractorName}: ${ret.notes}`,
+      photo: null,
+      batchNumber: null
+    });
+
+    return of(newReturn);
+  }
+
+  // Dashboard Stats (enhanced with cross-role data)
   getDashboardStats(): Observable<{
     totalStockValue: number;
     lowStockItems: number;
     expiringItems: number;
     pendingPOs: number;
     activeOrders: number;
+    pendingRequests: number;
     recentTransactions: Transaction[];
   }> {
     this.ensureInitialized();
@@ -498,6 +767,7 @@ export class DataService {
     const totalValue = products.reduce((sum, p) => sum + (p.stockQuantity * p.unitPrice), 0);
     const pendingPOs = this.purchaseOrdersSubject.value.filter(po => po.status === 'draft' || po.status === 'approved').length;
     const activeOrders = this.ordersSubject.value.filter(o => o.status === 'in-progress').length;
+    const pendingRequests = this.materialRequestsSubject.value.filter(r => r.status === 'pending').length;
     const recentTransactions = this.transactionsSubject.value.slice(0, 10);
 
     return of({
@@ -506,6 +776,7 @@ export class DataService {
       expiringItems: expiring,
       pendingPOs,
       activeOrders,
+      pendingRequests,
       recentTransactions
     });
   }
